@@ -170,3 +170,28 @@ function uploadToGoogleDrive($filePath, $fileName) {
 
     printf("File ID: %s\n", $file->id);
 }
+
+/**
+ * Insertar un nuevo link en el menú de navegación del curso.
+ *
+ * @param navigation_node $frontpage Node representing the front page in the navigation tree.
+ */
+function mod_exportgrades_extend_navigation_frontpage(navigation_node $frontpage) {
+    $frontpage->add(
+        get_string('pluginname', 'mod_exportgrades'),
+        new moodle_url('/mod/exportgrades/docs.php'),
+        navigation_node::TYPE_CUSTOM,
+    );
+}
+
+function mod_exportgrades_extend_navigation(global_navigation $root)
+{
+    $node = navigation_node::create(
+        get_string('pluginname', 'mod_exportgrades'),
+        new moodle_url('/mod/exportgrades/docs.php'),
+    );
+
+    $node->showinflatnavigation = true;
+    $root->add_node($node);
+}
+
